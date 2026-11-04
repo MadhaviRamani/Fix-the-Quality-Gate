@@ -1,10 +1,5 @@
-
 import { describe, expect, test } from "vitest";
-import {
-  calculatePoints,
-  generateRedeemCode,
-  loyaltyHeaders ,
-} from "./loyalty";
+import { calculatePoints, generateRedeemCode, loyaltyHeaders } from "./loyalty";
 
 describe("calculatePoints", () => {
   test("gives regular customers one point per full euro", () => {
@@ -50,18 +45,17 @@ test("creates a Basic authorization header when password is configured", () => {
     }
   }
 });
-  test("throws when the password is missing", () => {
-    const originalPassword = process.env.LOYALTY_PASSWORD;
-    delete process.env.LOYALTY_PASSWORD;
+test("throws when the password is missing", () => {
+  const originalPassword = process.env.LOYALTY_PASSWORD;
+  delete process.env.LOYALTY_PASSWORD;
 
-    try {
-      expect(() => loyaltyHeaders()).toThrow(
-        "LOYALTY_PASSWORD is not configured",
-      );
-    } finally {
-      if (originalPassword !== undefined) {
-        process.env.LOYALTY_PASSWORD = originalPassword;
-      }
+  try {
+    expect(() => loyaltyHeaders()).toThrow(
+      "LOYALTY_PASSWORD is not configured",
+    );
+  } finally {
+    if (originalPassword !== undefined) {
+      process.env.LOYALTY_PASSWORD = originalPassword;
     }
-  });
-
+  }
+});
